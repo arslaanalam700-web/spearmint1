@@ -228,14 +228,14 @@ class ReportGenerator:
         Exports the intelligence brief in clean GitHub-flavored markdown.
         """
         lines = []
-        lines.append(f"# 🛡️ {report.title}")
+        lines.append(f"# {report.title}")
         lines.append(f"**Generated:** {report.created_at.strftime('%Y-%m-%d %H:%M UTC')} | "
                      f"**Monitoring Window:** Last {report.monitoring_period_days} Days")
         lines.append(f"**Tracked Entities ({len(report.competitors_tracked)}):** {', '.join(report.competitors_tracked)}")
         lines.append(f"**Signals Ingested:** {report.total_raw_signals} | "
                      f"**Verified Retained Updates:** {report.total_retained_updates}")
         if report.is_demo_mode:
-            lines.append("\n> ⚠️ **NOTE:** This report includes explicitly labeled demonstration benchmark records.")
+            lines.append("\n> **NOTE:** This report includes explicitly labeled demonstration benchmark records.")
         lines.append("\n---\n")
 
         lines.append("## 1. Executive Summary")
@@ -248,10 +248,10 @@ class ReportGenerator:
         lines.append("\n")
 
         lines.append("## 3. Evidence-Based Opportunities & Threats")
-        lines.append("### 💡 Strategic Opportunities")
+        lines.append("### Strategic Opportunities")
         for opp in report.opportunities:
             lines.append(f"- {opp}")
-        lines.append("\n### ⚠️ Competitive Threats")
+        lines.append("\n### Competitive Threats")
         for threat in report.threats:
             lines.append(f"- {threat}")
         lines.append("\n")
@@ -266,7 +266,7 @@ class ReportGenerator:
 
             for u in updates:
                 priority_badge = f"`[{u.priority_level.value.upper()} PRIORITY]`"
-                lines.append(f"#### {u.category.emoji} {u.category.value} | {priority_badge} [{u.headline}]({u.source_url})")
+                lines.append(f"#### {u.category.value} | {priority_badge} [{u.headline}]({u.source_url})")
                 lines.append(f"- **Event Date:** {u.event_date} | **Source:** {', '.join(u.source_publishers)} ({u.verification_status})")
                 lines.append(f"- **[Factual Finding]:** {u.concise_summary}")
                 lines.append(f"- **[AI Strategic Interpretation]:** _{u.potential_business_impact}_\n")
@@ -411,7 +411,7 @@ class ReportGenerator:
         threat_paras = [Paragraph(f"• {self._clean_for_pdf(th)}", body_style) for th in report.threats]
 
         swot_data = [
-            [Paragraph("<b>💡 Strategic Opportunities</b>", h3_style), Paragraph("<b>⚠️ Competitive Threats</b>", h3_style)],
+            [Paragraph("<b>Strategic Opportunities</b>", h3_style), Paragraph("<b>Competitive Threats</b>", h3_style)],
             [opp_paras, threat_paras]
         ]
         swot_table = Table(swot_data, colWidths=[265, 265])

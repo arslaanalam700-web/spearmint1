@@ -27,17 +27,7 @@ class CategoryEnum(str, Enum):
 
     @property
     def emoji(self) -> str:
-        emojis = {
-            CategoryEnum.PRODUCT_LAUNCHES: "🚀",
-            CategoryEnum.PRICING: "💰",
-            CategoryEnum.HIRING: "👥",
-            CategoryEnum.PARTNERSHIPS: "🤝",
-            CategoryEnum.FUNDING_ACQUISITIONS: "📈",
-            CategoryEnum.MARKET_EXPANSION: "🌍",
-            CategoryEnum.TECH_AI_DEVELOPMENTS: "🧠",
-            CategoryEnum.GENERAL_STRATEGY: "📌",
-        }
-        return emojis.get(self, "📌")
+        return ""
 
 
 class PriorityLevel(str, Enum):

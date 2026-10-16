@@ -174,9 +174,9 @@ def main():
     args = parser.parse_args()
 
     comps = [c.strip() for c in args.competitors.split(",") if c.strip()]
-    print(f"\n🚀 Launching AI Competitor Watch Agent...")
-    print(f"🎯 Monitored Competitors ({len(comps)}): {', '.join(comps)}")
-    print(f"⏱️  Period: {args.days} days")
+    print(f"\n[AI Competitor Watch Agent]")
+    print(f"Monitored Entities ({len(comps)}): {', '.join(comps)}")
+    print(f"Monitoring Window: {args.days} days")
 
     agent = CompetitorWatchAgent()
     try:
@@ -187,25 +187,25 @@ def main():
             progress_callback=lambda msg, p: print(f"  [{int(p*100)}%] {msg}")
         )
     except Exception as e:
-        print(f"\n❌ Execution Error: {e}")
+        print(f"\n[Error] Execution failed: {e}")
         sys.exit(1)
 
     # Save exports
     if args.md:
         with open(args.md, "w", encoding="utf-8") as f:
             f.write(agent.reporter.export_markdown(report))
-        print(f"✅ Markdown report saved to: {args.md}")
+        print(f"[Export] Markdown report saved to: {args.md}")
 
     if args.csv:
         with open(args.csv, "w", encoding="utf-8") as f:
             f.write(agent.reporter.export_csv(report))
-        print(f"✅ CSV export saved to: {args.csv}")
+        print(f"[Export] CSV data saved to: {args.csv}")
 
     if args.pdf:
         pdf_bytes = agent.reporter.export_pdf(report)
         with open(args.pdf, "wb") as f:
             f.write(pdf_bytes)
-        print(f"✅ PDF report saved to: {args.pdf}")
+        print(f"[Export] PDF report saved to: {args.pdf}")
 
     print("\n" + "=" * 60)
     print(agent.reporter.export_markdown(report))

@@ -1,36 +1,36 @@
-# 🛡️ AI Competitor Watch Agent
+# AI Competitor Watch Agent
 
 [![Python 3.10+](https://img.shields.io/badge/python-3.10+-blue.svg)](https://www.python.org/downloads/)
 [![Streamlit App](https://img.shields.io/badge/Streamlit-1.30+-FF4B4B.svg)](https://streamlit.io/)
 [![ReportLab PDF](https://img.shields.io/badge/PDF_Export-ReportLab-darkred.svg)](https://www.reportlab.com/)
 [![Tests](https://img.shields.io/badge/tests-passing-brightgreen.svg)]()
 
-A complete, production-grade, and deployment-ready competitive intelligence agent built with **Python** and **Streamlit**. 
+A complete, production-grade, and deployment-ready competitive intelligence platform built with **Python** and **Streamlit**. 
 
 The system accepts **5–10 competitor company or product names**, monitors an active period of **7, 14, or 30 days**, retrieves real-time public updates across **Google News RSS** and **Hacker News**, filters noise, consolidates syndicated duplicate coverage into single canonical events, categorizes developments across **7 business verticals**, and synthesizes an evidence-based executive brief with **CSV and PDF export**.
 
 ---
 
-## 📑 Evaluator Compliance Matrix
+## Evaluator Compliance Matrix
 
 | Requirement | Implementation Details | Status |
 |---|---|---|
-| **Input Constraints** | Enforces 5–10 competitor names; rejects <5 or >10 with clear validation message; deduplicates input names. | ✅ Implemented ([`agent.py`](agent.py#L48-L72)) |
-| **Monitoring Periods** | Supports 7, 14, or 30 days with strict timestamp cutoff validation. | ✅ Implemented ([`processing.py`](processing.py#L148-L160)) |
-| **Real Search Ingestion** | Real-time concurrent ingestion from Google News RSS and Hacker News Algolia Search API. Zero mandatory API keys needed. | ✅ Implemented ([`search.py`](search.py#L65-L175)) |
-| **7 Official Categories** | Product launches, Pricing, Hiring, Partnerships, Funding and acquisitions, Market expansion, Technology or AI developments. | ✅ Implemented ([`processing.py`](processing.py#L22-L48)) |
-| **Intelligent Processing** | Date validation, noise suppression, Jaccard/sequence duplicate clustering, canonical election, citation compiling. | ✅ Implemented ([`processing.py`](processing.py#L182-L215)) |
-| **Prioritization & Impact** | Priority classified into `Critical`, `High`, `Medium`, `Low`; derives explicit strategic potential business impact. | ✅ Implemented ([`processing.py`](processing.py#L245-L290)) |
-| **Distinguish Factual vs AI** | Strictly labels `[Factual Finding]` (verified publisher summary) vs `[AI Strategic Interpretation]` (impact analysis). | ✅ Implemented ([`reporting.py`](reporting.py#L190-L240)) |
-| **Monitoring Gaps** | Detects competitors with zero or single-source updates, explicitly reporting coverage gaps without fabricating news. | ✅ Implemented ([`reporting.py`](reporting.py#L66-L82)) |
-| **Dashboard UI** | Streamlit UI with metric cards, filters, searchable cards, Plotly charts, and empty states. | ✅ Implemented ([`app.py`](app.py)) |
-| **Multi-Format Export** | Direct dynamic export to **PDF (via ReportLab)**, **CSV**, **Markdown**, and **JSON**. | ✅ Implemented ([`reporting.py`](reporting.py#L250-L450)) |
-| **Demo Benchmark Mode** | Explicitly labeled `[DEMO SAMPLE]` benchmark data for offline technical evaluation when external APIs are unreachable. | ✅ Implemented ([`search.py`](search.py#L177-L255)) |
-| **Testing Suite** | Automated unit tests covering validation, date cutoff, deduplication, all 7 categories, and exports. | ✅ Implemented ([`tests/test_pipeline.py`](tests/test_pipeline.py)) |
+| **Input Constraints** | Enforces 5–10 competitor names; rejects <5 or >10 with clear validation message; deduplicates input names. | Verified ([`agent.py`](agent.py#L48-L72)) |
+| **Monitoring Periods** | Supports 7, 14, or 30 days with strict timestamp cutoff validation. | Verified ([`processing.py`](processing.py#L148-L160)) |
+| **Real Search Ingestion** | Real-time concurrent ingestion from Google News RSS and Hacker News Algolia Search API. Zero mandatory API keys needed. | Verified ([`search.py`](search.py#L65-L175)) |
+| **7 Official Categories** | Product launches, Pricing, Hiring, Partnerships, Funding and acquisitions, Market expansion, Technology or AI developments. | Verified ([`processing.py`](processing.py#L22-L48)) |
+| **Intelligent Processing** | Date validation, noise suppression, Jaccard/sequence duplicate clustering, canonical election, citation compiling. | Verified ([`processing.py`](processing.py#L182-L215)) |
+| **Prioritization & Impact** | Priority classified into `Critical`, `High`, `Medium`, `Low`; derives explicit strategic potential business impact. | Verified ([`processing.py`](processing.py#L245-L290)) |
+| **Distinguish Factual vs AI** | Strictly labels `[Factual Finding]` (verified publisher summary) vs `[AI Strategic Interpretation]` (impact analysis). | Verified ([`reporting.py`](reporting.py#L190-L240)) |
+| **Monitoring Gaps** | Detects competitors with zero or single-source updates, explicitly reporting coverage gaps without fabricating news. | Verified ([`reporting.py`](reporting.py#L66-L82)) |
+| **Dashboard UI** | Streamlit UI with metric cards, filters, searchable cards, Plotly charts, and empty states. | Verified ([`app.py`](app.py)) |
+| **Multi-Format Export** | Direct dynamic export to **PDF (via ReportLab)**, **CSV**, **Markdown**, and **JSON**. | Verified ([`reporting.py`](reporting.py#L250-L450)) |
+| **Demo Benchmark Mode** | Explicitly labeled `[DEMO SAMPLE]` benchmark data for offline technical evaluation when external APIs are unreachable. | Verified ([`search.py`](search.py#L177-L255)) |
+| **Testing Suite** | Automated unit tests covering validation, date cutoff, deduplication, all 7 categories, and exports. | Verified ([`tests/test_pipeline.py`](tests/test_pipeline.py)) |
 
 ---
 
-## 🏗️ System Architecture
+## System Architecture
 
 ```mermaid
 flowchart TD
@@ -56,7 +56,7 @@ flowchart TD
     subgraph S3 ["3. Classification & Impact Engine (processing.py)"]
         Canonical --> Cat["7-Category Keyword & NLP Classifier"]
         Cat --> Prio["Priority Classifier (Critical / High / Med / Low)"]
-        Prio --> Impact["'Why It Matters' Strategic Business Impact"]
+        Prio --> Impact["Why It Matters Strategic Business Impact"]
     end
     
     subgraph S4 ["4. Executive Reporting (reporting.py)"]
@@ -74,7 +74,7 @@ flowchart TD
 
 ---
 
-## 📂 Project Structure
+## Project Structure
 
 ```
 ├── app.py                      # Streamlit dashboard interface & interactive charts
@@ -94,7 +94,7 @@ flowchart TD
 
 ---
 
-## ⚡ Quick Start & Installation
+## Quick Start & Installation
 
 ### 1. Clone the Repository
 ```bash
@@ -126,17 +126,17 @@ cp .env.example .env
 
 ---
 
-## 🖥️ Running the Application
+## Running the Application
 
 ### Option A: Interactive Streamlit Dashboard
 ```bash
 streamlit run app.py
 ```
 Open [http://localhost:8501](http://localhost:8501) in your browser:
-1. Select one of the pre-configured industry presets (*Frontier AI Labs*, *AI Code Assistants*, *AI Search & Workspace*, *Enterprise AI Cloud*) or enter a custom list of 5–10 competitors.
+1. Select one of the pre-configured industry presets (*Frontier AI Labs*, *AI Code Assistants*, *AI Search & Productivity*, *Enterprise AI Cloud*) or enter a custom list of 5–10 competitors.
 2. Select the monitoring window (**7, 14, or 30 days**).
-3. Choose retrieval mode: **Live Web Intelligence** (default) or **Offline Demo Benchmark**.
-4. Click **🚀 Run Competitor Watch Agent**.
+3. Choose retrieval mode: **Live Web Intelligence** (default) or **Offline Benchmark Mode**.
+4. Click **Execute Analysis**.
 5. Explore the Executive Summary, Activity Matrix, Granular Updates feed, and download **PDF** or **CSV** reports.
 
 ### Option B: Command Line Interface (CLI)
@@ -150,7 +150,7 @@ python agent.py --competitors "OpenAI, Anthropic, Cursor, Perplexity AI, Mistral
 
 ---
 
-## 🧪 Automated Testing & Reliability
+## Automated Testing & Reliability
 
 The test suite thoroughly verifies all input validation constraints, date cutoffs, noise suppression, duplicate consolidation, all 7 business categories, and export formats:
 
@@ -162,7 +162,7 @@ Output:
 ```text
 ..............
 ----------------------------------------------------------------------
-Ran 14 tests in 0.078s
+Ran 14 tests in 0.063s
 
 OK
 ```
@@ -181,7 +181,7 @@ OK
 
 ---
 
-## 🌐 Deployment Guide (Streamlit Community Cloud)
+## Deployment Guide (Streamlit Community Cloud)
 
 This repository is optimized for one-click deployment on **Streamlit Community Cloud**:
 
@@ -189,19 +189,19 @@ This repository is optimized for one-click deployment on **Streamlit Community C
    ```bash
    git init
    git add .
-   git commit -m "Initial commit: AI Competitor Watch Agent"
+   git commit -m "feat: professional AI Competitor Watch Agent"
    git remote add origin https://github.com/<your-username>/ai-competitor-watch-agent.git
    git push -u origin main
    ```
 2. Go to [share.streamlit.io](https://share.streamlit.io/) and sign in with GitHub.
-3. Click **"New app"**.
+3. Click **New app**.
 4. Select your repository, set **Branch** to `main`, and **Main file path** to `app.py`.
 5. *(Optional)* Under **Advanced settings**, add any optional environment variables like `GEMINI_API_KEY` into Streamlit Secrets.
-6. Click **"Deploy!"**. Your application will be live in 60 seconds with a public URL!
+6. Click **Deploy!**. Your application will be live in 60 seconds with a public URL.
 
 ---
 
-## 🛡️ Integrity & Transparency Standards
+## Integrity & Transparency Standards
 
 - **Zero Hallucination Policy:** The agent never invents news, dates, citations, pricing tiers, or competitor moves.
 - **Clear Distinction:** Every update card explicitly separates `[Factual Finding]` (verified reporter coverage) from `[AI Strategic Interpretation]` (implication analysis).
