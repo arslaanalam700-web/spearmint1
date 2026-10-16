@@ -622,6 +622,8 @@ def main():
             
             # Clickable Citations
             citations_html = ", ".join([f"<a href='{c}' target='_blank' style='color:#2563eb;'>Source Link</a>" for c in u.all_citations[:3]])
+            fallback_link = f"<a href='{u.source_url}' target='_blank' style='color:#2563eb;'>Primary URL</a>"
+            citations_display = citations_html if citations_html else fallback_link
 
             st.markdown(f"""
             <div class="card-update">
@@ -647,7 +649,7 @@ def main():
                     <b>[AI Strategic Interpretation]:</b> {u.potential_business_impact}
                 </div>
                 <div style="margin-top: 8px; font-size: 0.82rem; color: #64748b;">
-                    Citations: {citations_html if citations_html else '<a href=\"' + u.source_url + '\" target=\"_blank\" style=\"color:#2563eb;\">Primary URL</a>'}
+                    Citations: {citations_display}
                 </div>
             </div>
             """, unsafe_allow_html=True)
